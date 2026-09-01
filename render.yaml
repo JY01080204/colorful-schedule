@@ -1,0 +1,19 @@
+# 彩色日程 · Render Blueprint 配置
+# 用法：Render 控制台 → New → Blueprint → 选择本仓库，按提示填 3 个环境变量即可
+services:
+  - type: web
+    name: colorful-schedule
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /
+    envVars:
+      # 这三个值在部署向导里手动填写（取自本机 vapid-keys.json）
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        value: mailto:schedule-planner@localhost

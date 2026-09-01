@@ -1,0 +1,15 @@
+{
+  "name": "colorful-schedule",
+  "version": "1.0.0",
+  "private": true,
+  "description": "彩色日程规划小助手（月历 + 彩色任务 + Web Push 提醒 + .ics 同步）",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
+  }
+}

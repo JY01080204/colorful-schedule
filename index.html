@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#4f8cff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="彩色日程规划小助手：用颜色标记每天要做的事，支持日历同步与提醒">
+<title>彩色日程 · 规划小助手</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <span class="brand-dot"></span>
+    <span class="brand-name">彩色日程</span>
+  </div>
+
+  <div class="month-nav">
+    <button id="prevMonth" class="nav-btn" title="上一月">‹</button>
+    <h2 id="monthTitle">—</h2>
+    <button id="nextMonth" class="nav-btn" title="下一月">›</button>
+    <button id="todayBtn" class="ghost-btn">今天</button>
+  </div>
+
+  <div class="actions">
+    <span id="pushState" class="push-state">📶 推送未开启</span>
+    <button id="remindBtn" class="ghost-btn" title="开启浏览器通知；已开启时点击发送测试推送">🔔 提醒</button>
+    <button id="muteBtn" class="ghost-btn" title="提示音开关">🔊</button>
+    <button id="exportBtn" class="ghost-btn" title="导出 .ics 日历文件，可导入系统日历/Google/Outlook">⬇ 导出 .ics</button>
+    <button id="importBtn" class="ghost-btn" title="从 .ics 日历文件导入日程">⬆ 导入 .ics</button>
+    <button id="backupBtn" class="ghost-btn" title="把全部数据备份为 JSON 文件">💾 备份</button>
+    <button id="restoreBtn" class="ghost-btn" title="从备份 JSON 文件恢复数据">♻ 恢复</button>
+    <input type="file" id="icsFile" accept=".ics,text/calendar" hidden>
+    <input type="file" id="jsonFile" accept=".json,application/json" hidden>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="calendar-wrap">
+    <div class="weekdays">
+      <span>周一</span><span>周二</span><span>周三</span><span>周四</span><span>周五</span><span>周六</span><span>周日</span>
+    </div>
+    <div id="calendarGrid" class="calendar-grid"></div>
+  </section>
+
+  <aside id="dayPanel" class="day-panel">
+    <div class="day-panel-head">
+      <h3 id="dayTitle">任务</h3>
+      <span id="dayCount" class="day-count"></span>
+    </div>
+
+    <div id="taskList" class="task-list"></div>
+
+    <form id="taskForm" class="task-form" autocomplete="off">
+      <input type="hidden" id="taskId">
+      <div class="form-row">
+        <input type="text" id="fTitle" placeholder="要做的事…（必填）" maxlength="80">
+      </div>
+      <div class="form-row">
+        <input type="date" id="fDate">
+        <label class="all-day-box">
+          <input type="checkbox" id="fAllDay"> 全天
+        </label>
+        <input type="time" id="fTime">
+      </div>
+      <div class="form-row colors-row" id="colorSwatches"></div>
+      <div class="form-row">
+        <select id="fReminder">
+          <option value="">不提醒</option>
+          <option value="0">准时提醒</option>
+          <option value="5">提前 5 分钟</option>
+          <option value="10">提前 10 分钟</option>
+          <option value="15">提前 15 分钟</option>
+          <option value="30">提前 30 分钟</option>
+          <option value="60">提前 1 小时</option>
+          <option value="120">提前 2 小时</option>
+        </select>
+        <button type="submit" id="submitBtn" class="primary-btn">＋ 添加任务</button>
+        <button type="button" id="cancelEditBtn" class="ghost-btn" hidden>取消</button>
+      </div>
+    </form>
+  </aside>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/ics.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
