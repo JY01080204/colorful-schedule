@@ -1,0 +1,5 @@
+# 部署时忽略的文件（Cloudflare Pages / wrangler 资源打包排除项）
+node_modules
+.git
+push-data.json
+vapid-keys.json
